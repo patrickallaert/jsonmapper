@@ -17,6 +17,16 @@ class PrivateWithSetter
      */
     private $privatePropertyPrivateSetter = 0;
 
+    /**
+     * @var int
+     */
+    private $privatePropertySetterWithoutDoc = 0;
+
+    /**
+     * @var int|null
+     */
+    private $privatePropertyNullableSetterWithoutDoc = 0;
+
     private $_internal = array();
 
     /**
@@ -27,6 +37,18 @@ class PrivateWithSetter
     public function setPrivateProperty($privateProperty)
     {
         $this->privateProperty = $privateProperty;
+        return $this;
+    }
+
+    public function setPrivatePropertySetterWithoutDoc(int $privateProperty)
+    {
+        $this->privatePropertySetterWithoutDoc = $privateProperty;
+        return $this;
+    }
+
+    public function setPrivatePropertyNullableSetterWithoutDoc(int $privateProperty = null)
+    {
+        $this->privatePropertyNullableSetterWithoutDoc = $privateProperty;
         return $this;
     }
 
@@ -76,6 +98,22 @@ class PrivateWithSetter
     public function getPrivatePropertyPrivateSetter()
     {
         return $this->privatePropertyPrivateSetter;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPrivatePropertySetterWithoutDoc()
+    {
+        return $this->privatePropertySetterWithoutDoc;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getPrivatePropertyNullableSetterWithoutDoc()
+    {
+        return $this->privatePropertyNullableSetterWithoutDoc;
     }
 
     public function getPrivateSetter()

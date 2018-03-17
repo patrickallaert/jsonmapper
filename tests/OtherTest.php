@@ -271,6 +271,36 @@ class OtherTest extends \PHPUnit\Framework\TestCase
         $result = $jm->map(json_decode($json), new PrivateWithSetter());
     }
 
+    public function testPrivatePropertySetterWithoutDoc()
+    {
+        $jm = new JsonMapper();
+        $jm->bExceptionOnUndefinedProperty = true;
+        $jm->setLogger(new JsonMapperTest_Logger());
+
+        $result = $jm->map(json_decode('{"privatePropertySetterWithoutDoc" : 1}'), new PrivateWithSetter());
+        $this->assertEquals(1, $result->getPrivatePropertySetterWithoutDoc());
+    }
+
+    public function testPrivatePropertyNullableNotNullSetterWithoutDoc()
+    {
+        $jm = new JsonMapper();
+        $jm->bExceptionOnUndefinedProperty = true;
+        $jm->setLogger(new JsonMapperTest_Logger());
+
+        $result = $jm->map(json_decode('{"privatePropertyNullableSetterWithoutDoc" : 1}'), new PrivateWithSetter());
+        $this->assertSame(1, $result->getPrivatePropertyNullableSetterWithoutDoc());
+    }
+
+    public function testPrivatePropertyNullableNullSetterWithoutDoc()
+    {
+        $jm = new JsonMapper();
+        $jm->bExceptionOnUndefinedProperty = true;
+        $jm->setLogger(new JsonMapperTest_Logger());
+
+        $result = $jm->map(json_decode('{"privatePropertyNullableSetterWithoutDoc" : null}'), new PrivateWithSetter());
+        $this->assertNull($result->getPrivatePropertyNullableSetterWithoutDoc());
+    }
+
     public function testPrivateSetterButAllowed()
     {
         $jm = new JsonMapper();

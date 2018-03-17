@@ -421,6 +421,13 @@ class JsonMapper
                             '\\' . $pclass->getName() . $nullability
                         );
                     }
+                    $ptype = $rparams[0]->getType();
+                    if ($ptype !== null) {
+                        return array(
+                            true, $rmeth,
+                            $ptype . $nullability
+                        );
+                    }
                 }
 
                 $docblock    = $rmeth->getDocComment();
